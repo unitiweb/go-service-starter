@@ -1,0 +1,14 @@
+version: '3.5'
+
+services:
+
+  api:
+    build: .
+    ports:
+      - "${PORT}:${PORT}"
+    restart: unless-stopped
+    environment:
+      PORT: ${PORT}
+    command: go run main/main.go
+    volumes:
+      - .:/do/github.com/unitiweb/go-microservice
