@@ -16,7 +16,7 @@ var Config config
 
 func LoadEnv() {
 	// Load environment variables from .env if it exists
-	err := godotenv.Load("../.env")
+	err := godotenv.Load()
 	if err != nil {
 		fmt.Println("No .env file, so just use the environment")
 	}

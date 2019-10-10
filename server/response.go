@@ -19,6 +19,7 @@ func ToJson(w http.ResponseWriter, d interface{}) {
 	)
 	if err != nil {
 		io.WriteString(w, "Error could not be converted to json")
+		return
 	}
 
 	io.WriteString(w, string(b))
