@@ -1,4 +1,4 @@
-package player
+package course
 
 import (
 	"github.com/unitiweb/go-service-starter/db"
@@ -20,7 +20,7 @@ func DeleteInit() {
 func (d del) Config() server.EndpointConfig {
 	return server.EndpointConfig{
 		Method: http.MethodDelete,
-		Path:   "/players/{id}",
+		Path:   "/courses/{id}",
 	}
 }
 
@@ -36,13 +36,13 @@ func (d del) Handle(r *http.Request, data *server.Data) (interface{}, error) {
 
 	// Get id as Int from Url Query
 	id := utils.GetUrlQueryInt(r, "id")
-	p := db.Player{}.Find(id)
+	p := db.Course{}.Find(id)
 	if p.Id == nil {
 		err = server.ThrowError(NotFound)
 		return p, err
 	}
 
-	// Store the player in the database
+	// Store the course in the database
 	db.Conn.Delete(&p)
 
 	return p, err

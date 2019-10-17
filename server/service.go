@@ -11,12 +11,12 @@ type ValidateError struct {
 }
 
 // Starts the server and listens on the configured port
-func Listen() {
+func Listen(cfg Config) {
 
 	// If the env hasn't been loaded yet, then load it now
-	if Config.EnvLoaded == false {
-		LoadEnv()
-	}
+	//if Config.EnvLoaded == false {
+	//	LoadEnv()
+	//}
 
 	// Add some system errors
 	AddError("RouteNotFound", 404, "The route does not exist")
@@ -35,7 +35,7 @@ func Listen() {
 	catchAllNonRoutes()
 
 	// Build and log the address
-	address := fmt.Sprintf(":%s", Config.Port)
+	address := fmt.Sprintf(":%s", cfg.Port)
 	logStartMessage(address)
 
 	// Start the server and listen to port

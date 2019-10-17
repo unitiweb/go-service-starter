@@ -1,4 +1,4 @@
-package player
+package course
 
 import (
 	"github.com/unitiweb/go-service-starter/db"
@@ -7,43 +7,40 @@ import (
 	"net/http"
 )
 
-// The main post struct
+// The main put struct
 // Implements the EndpointInterface
-type del struct{}
+type getCourse struct{}
 
-func DeleteInit() {
-	e := del{}
+func GetInit() {
+	e := getCourse{}
 	server.AddEndpoint(e)
 }
 
 // Get endpoint configuration
-func (d del) Config() server.EndpointConfig {
+func (g getCourse) Config() server.EndpointConfig {
 	return server.EndpointConfig{
-		Method: http.MethodDelete,
-		Path:   "/players/{id}",
+		Method: http.MethodGet,
+		Path:   "/courses/{id}",
 	}
 }
 
 // Validate the endpoints input data
-func (d del) Validate(r *http.Request, data *server.Data) []string {
+func (g getCourse) Validate(r *http.Request, data *server.Data) []string {
 	var v []string
 	return v
 }
 
 // Handle the endpoint request
-func (d del) Handle(r *http.Request, data *server.Data) (interface{}, error) {
+func (g getCourse) Handle(r *http.Request, data *server.Data) (interface{}, error) {
 	var err error
 
 	// Get id as Int from Url Query
 	id := utils.GetUrlQueryInt(r, "id")
-	p := db.Player{}.Find(id)
+	p := db.Course{}.Find(id)
 	if p.Id == nil {
 		err = server.ThrowError(NotFound)
 		return p, err
 	}
-
-	// Store the player in the database
-	db.Conn.Delete(&p)
 
 	return p, err
 }

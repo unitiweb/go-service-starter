@@ -5,6 +5,7 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/unitiweb/go-service-starter/db"
 	"github.com/unitiweb/go-service-starter/endpoints"
+	"github.com/unitiweb/go-service-starter/env"
 	"github.com/unitiweb/go-service-starter/server"
 )
 
@@ -14,6 +15,9 @@ type Player struct {
 }
 
 func main() {
+	// Load Environmet Variables
+	env.LoadEnv()
+
 	// Create the database connection
 	db.Connect()
 	defer db.Close()
@@ -28,5 +32,9 @@ func main() {
 	endpoints.AddAll()
 
 	// Start the server
-	server.Listen()
+	server.Listen(
+		server.Config{
+			Port: env.Get("PORT"),
+		},
+	)
 }
