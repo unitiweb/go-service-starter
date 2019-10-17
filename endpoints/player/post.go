@@ -29,11 +29,6 @@ func (pt post) Validate(r *http.Request, data *server.Data) []string {
 	return validateInput(data)
 }
 
-// Add Endpoint Middleware (if any)
-func (pt post) Middleware(w http.ResponseWriter, r *http.Request, next http.Handler) {
-	// Nothing to do here
-}
-
 // Handle the endpoint request
 func (pt post) Handle(r *http.Request, data *server.Data) (interface{}, error) {
 	var err error

@@ -1,6 +1,7 @@
 package endpoints
 
 import (
+	"github.com/unitiweb/go-service-starter/endpoints/course"
 	"github.com/unitiweb/go-service-starter/endpoints/healthCheck"
 	"github.com/unitiweb/go-service-starter/endpoints/player"
 )
@@ -12,4 +13,5 @@ func AddAll() {
 
 	// Load the player endpoints
 	player.Init()
+	course.Init()
 }

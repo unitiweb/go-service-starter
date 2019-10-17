@@ -1,7 +1,6 @@
 package player
 
 import (
-	"fmt"
 	"github.com/unitiweb/go-service-starter/db"
 	"github.com/unitiweb/go-service-starter/server"
 	"github.com/unitiweb/go-service-starter/utils"
@@ -31,11 +30,6 @@ func (g get) Validate(r *http.Request, data *server.Data) []string {
 	return v
 }
 
-// Add Endpoint Middleware (if any)
-func (g get) Middleware(w http.ResponseWriter, r *http.Request, next http.Handler) {
-	// Nothing to do here
-}
-
 // Handle the endpoint request
 func (g get) Handle(r *http.Request, data *server.Data) (interface{}, error) {
 	var err error
@@ -43,9 +37,8 @@ func (g get) Handle(r *http.Request, data *server.Data) (interface{}, error) {
 	// Get id as Int from Url Query
 	id := utils.GetUrlQueryInt(r, "id")
 	p := db.Player{}.Find(id)
-	fmt.Println("p", p)
-	if p.Id == nil || p.DeletedAt != nil {
-		err = server.ThrowError("PlayerNotFound")
+	if p.Id == nil {
+		err = server.ThrowError(NotFound)
 		return p, err
 	}
 

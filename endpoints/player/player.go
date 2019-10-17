@@ -10,12 +10,15 @@ type player struct {
 	playerName string
 }
 
+const NotFound = "PlayerNotFound"
+
 func Init() {
 	// Add the player not found error
-	server.AddError("PlayerNotFound", 404, "The requested player could not be found")
+	server.AddError(NotFound, 404, "The requested player could not be found")
 
 	// Initialize Endpoints
 	GetInit()
+	GetAllInit()
 	PostInit()
 	PutInit()
 	DeleteInit()

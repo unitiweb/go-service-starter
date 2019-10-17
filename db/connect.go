@@ -4,15 +4,12 @@ import (
 	"fmt"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
-	"github.com/unitiweb/go-service-starter/database/models"
 	"time"
 )
 
 var Conn *gorm.DB
 
 func Connect() {
-
-	//db, err := gorm.Open("mysql", "root:password1@(mysql)/starter?parseTime=true")
 
 	connected := false
 	tryCount := 0
@@ -27,14 +24,13 @@ func Connect() {
 			connected = true
 		}
 	}
-
-	//if err != nil {
-	//	panic("faield to connect to database")
-	//}
 }
 
 func Migrate() {
-	Conn.AutoMigrate(&models.Player{})
+	Conn.AutoMigrate(
+		&Player{},
+		&Course{},
+	)
 }
 
 func Close() {

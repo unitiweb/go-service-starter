@@ -19,6 +19,13 @@ func (p Player) Find(id int) Player {
 	return p
 }
 
+// Get all players
+func (p Player) FindAll() []Player {
+	var ap []Player
+	Conn.Find(&ap)
+	return ap
+}
+
 func (p Player) Update() {
 	Conn.Save(&p)
 }

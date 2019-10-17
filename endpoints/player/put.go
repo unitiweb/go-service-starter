@@ -29,11 +29,6 @@ func (pt put) Validate(r *http.Request, data *server.Data) []string {
 	return validateInput(data)
 }
 
-// Add Endpoint Middleware (if any)
-func (pt put) Middleware(w http.ResponseWriter, r *http.Request, next http.Handler) {
-	// Nothing to do here
-}
-
 // Handle the endpoint request
 func (pt put) Handle(r *http.Request, data *server.Data) (interface{}, error) {
 	var err error
@@ -42,7 +37,7 @@ func (pt put) Handle(r *http.Request, data *server.Data) (interface{}, error) {
 	id := utils.GetUrlQueryInt(r, "id")
 	p := db.Player{}.Find(id)
 	if p.Id == nil {
-		err = server.ThrowError("PlayerNotFound")
+		err = server.ThrowError(NotFound)
 		return p, err
 	}
 

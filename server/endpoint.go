@@ -14,7 +14,7 @@ type EndpointInterface interface {
 	Config() EndpointConfig
 	Validate(r *http.Request, data *Data) []string
 	Handle(r *http.Request, data *Data) (interface{}, error)
-	Middleware(w http.ResponseWriter, r *http.Request, next http.Handler) // Not implemented yet
+	//Middleware(w http.ResponseWriter, r *http.Request, next http.Handler) // Not implemented yet
 }
 
 type Data struct {
